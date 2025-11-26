@@ -1,0 +1,5 @@
+{
+  "name": "Mushroom Processing Village",
+  "description": "A comprehensive prototype for managing mushroom intake, processing, packing, and inventory with automated calculations and alerts.",
+  "requestFramePermissions": []
+}
