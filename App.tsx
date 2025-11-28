@@ -6,10 +6,17 @@ import { Processing } from './pages/Processing';
 import { Packing } from './pages/Packing';
 import { Inventory } from './pages/Inventory';
 import { Admin } from './pages/Admin';
-import { AppProvider } from './context/AppContext';
+import { Login } from './pages/Login';
+import { AppProvider, useApp } from './context/AppContext';
 
-function App() {
+// Inner component to access context
+const AppContent = () => {
+  const { currentUser } = useApp();
   const [activeTab, setActiveTab] = useState('dashboard');
+
+  if (!currentUser) {
+    return <Login />;
+  }
 
   const renderContent = () => {
     switch (activeTab) {
@@ -25,10 +32,16 @@ function App() {
   };
 
   return (
+    <Layout activeTab={activeTab} setActiveTab={setActiveTab}>
+      {renderContent()}
+    </Layout>
+  );
+};
+
+function App() {
+  return (
     <AppProvider>
-      <Layout activeTab={activeTab} setActiveTab={setActiveTab}>
-        {renderContent()}
-      </Layout>
+      <AppContent />
     </AppProvider>
   );
 }

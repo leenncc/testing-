@@ -11,6 +11,17 @@
         font-family: 'Inter', sans-serif;
         background-color: #f3f4f6;
       }
+      .bg-pattern {
+        background-image: radial-gradient(#ffffff 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+      @keyframes fade-in {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in {
+        animation: fade-in 0.3s ease-out forwards;
+      }
     </style>
   <script type="importmap">
 {
@@ -19,7 +30,8 @@
     "react/": "https://aistudiocdn.com/react@^19.2.0/",
     "react": "https://aistudiocdn.com/react@^19.2.0",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "recharts": "https://aistudiocdn.com/recharts@^3.5.0"
+    "recharts": "https://aistudiocdn.com/recharts@^3.5.0",
+    "@emailjs/browser": "https://cdn.jsdelivr.net/npm/@emailjs/browser@4.1.0/+esm"
   }
 }
 </script>

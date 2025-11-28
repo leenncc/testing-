@@ -52,9 +52,10 @@ export interface InventoryItem {
 export interface Alert {
   id: string;
   message: string;
-  type: 'warning' | 'error' | 'info';
+  type: 'warning' | 'error' | 'info' | 'success'; // Added success
   timestamp: Date;
   resolved: boolean;
+  source?: 'System' | 'Village A' | 'Village B'; // Added source
 }
 
 export interface Recipe {
@@ -64,4 +65,18 @@ export interface Recipe {
   waterFormula: (weight: number) => number; // returns liters
   dryTimeFormula: (weight: number) => number; // returns minutes
   cookInstructions: string[];
+}
+
+export interface User {
+  id: string; // This is the username/login ID
+  name: string;
+  email: string; // Must be gmail
+  password: string;
+  role: 'Manager' | 'Finance Clerk' | 'Packing Staff' | 'Processing Worker';
+}
+
+export interface DatabaseConfig {
+  scriptUrl: string;
+  sheetId: string;
+  lastSync: Date | null;
 }

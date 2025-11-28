@@ -1,5 +1,6 @@
 import React from 'react';
-import { LayoutDashboard, Truck, Utensils, Package, ClipboardList, Settings, BarChart3, Menu } from 'lucide-react';
+import { useApp } from '../context/AppContext';
+import { LayoutDashboard, Truck, Utensils, Package, ClipboardList, Settings, BarChart3, Menu, LogOut, UserCircle } from 'lucide-react';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -22,6 +23,7 @@ const SidebarItem = ({ icon: Icon, label, id, active, onClick }: any) => (
 );
 
 export const Layout: React.FC<LayoutProps> = ({ children, activeTab, setActiveTab }) => {
+  const { currentUser, logout } = useApp();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
   const menuItems = [
@@ -65,15 +67,21 @@ export const Layout: React.FC<LayoutProps> = ({ children, activeTab, setActiveTa
         </nav>
 
         <div className="absolute bottom-0 w-full p-4 border-t border-purple-800 bg-purple-900">
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-xs">
-              JD
+          <div className="flex items-center space-x-3 mb-3">
+            <div className="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-sm">
+              {currentUser?.name?.charAt(0) || 'U'}
             </div>
-            <div>
-              <p className="text-sm font-medium text-white">John Doe</p>
-              <p className="text-xs text-purple-300">Processing Manager</p>
+            <div className="overflow-hidden">
+              <p className="text-sm font-medium text-white truncate">{currentUser?.name}</p>
+              <p className="text-xs text-purple-300 truncate">{currentUser?.role}</p>
             </div>
           </div>
+          <button 
+            onClick={logout}
+            className="w-full flex items-center justify-center px-4 py-2 bg-purple-800 hover:bg-purple-700 text-white text-xs font-bold rounded transition-colors"
+          >
+            <LogOut className="w-3 h-3 mr-2" /> Sign Out
+          </button>
         </div>
       </aside>
 
